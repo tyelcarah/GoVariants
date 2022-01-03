@@ -1,3 +1,11 @@
+class Stone:
+    def __init__(self,c,i):
+        self.colour=c
+        self.intersection=i
+
+    def __repr__(self):
+        return self.colour + " stone on " + str(self.intersections.x_coord) + "-" + str(self.intersections.y_coord)
+
 class BoardIntersection:
     def __init__(self, x, y, m):
         self.x_coord=x
@@ -7,7 +15,10 @@ class BoardIntersection:
 
     def __repr__(self):
 #return str(self.x_coord)+"/"+str(self.y_coord)
-        return self.stone
+        if type(self.stone) is str:
+            return self.stone
+        else:
+            return self.stone.colour
 
 class Board:
     def __init__(self):
@@ -44,6 +55,7 @@ class Board:
     def put_stone(self,x,y, colour):
         for intersection in self.intersections:
             if intersection.x_coord == x and intersection.y_coord == y:
-                intersection.stone = colour
+                new_stone = Stone(colour,intersection)
+                intersection.stone = new_stone
 
 
